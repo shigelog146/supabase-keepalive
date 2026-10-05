@@ -1,0 +1,30 @@
+name: Supabase keepalive
+
+on:
+  schedule:
+    - cron: "0 0 */3 * *"   # 3日ごと (UTC)
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false      # 片方が失敗してももう片方は実行する
+      matrix:
+        include:
+          - name: udon
+            url: https://sdgdgkolzvymvhtwccyh.supabase.co
+            key_secret: SUPABASE_ANON_KEY_UDON
+          - name: soba
+            url: https://zyvpzobykvuscxuhsrad.supabase.co
+            key_secret: SUPABASE_ANON_KEY_SOBA
+    steps:
+      - name: Ping ${{ matrix.name }}
+        env:
+          KEY: ${{ secrets[matrix.key_secret] }}
+        run: |
+          curl -fsS -X POST "${{ matrix.url }}/rest/v1/rpc/keepalive_ping" \
+            -H "apikey: $KEY" \
+            -H "Authorization: Bearer $KEY" \
+            -H "Content-Type: application/json" \
+            -d '{}'
