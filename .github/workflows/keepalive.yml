@@ -9,7 +9,7 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false      # 片方が失敗してももう片方は実行する
+      fail-fast: false      # どれかが失敗しても他は実行する
       matrix:
         include:
           - name: udon
@@ -18,6 +18,12 @@ jobs:
           - name: soba
             url: https://zyvpzobykvuscxuhsrad.supabase.co
             key_secret: SUPABASE_ANON_KEY_SOBA
+          - name: sobasoba100
+            url: https://flefnottwzsbihgrqrqk.supabase.co
+            key_secret: SUPABASE_ANON_KEY_SOBASOBA100
+          - name: tennpura
+            url: https://csaatvnbaspkzrqomnvt.supabase.co
+            key_secret: SUPABASE_ANON_KEY_TENNPURA
     steps:
       - name: Ping ${{ matrix.name }}
         env:
