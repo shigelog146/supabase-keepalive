@@ -24,6 +24,12 @@ jobs:
           - name: tennpura
             url: https://csaatvnbaspkzrqomnvt.supabase.co
             key_secret: SUPABASE_ANON_KEY_TENNPURA
+          - name: yakitori
+            url: https://rcecnzsakcjgkeifbslw.supabase.co
+            key_secret: SUPABASE_ANON_KEY_YAKITORI
+          - name: sushi
+            url: https://jbcsbcymyhvkbcoqtbaw.supabase.co
+            key_secret: SUPABASE_ANON_KEY_SUSHI
     steps:
       - name: Ping ${{ matrix.name }}
         env:
